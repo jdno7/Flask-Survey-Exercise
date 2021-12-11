@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Surey Home{% endblock %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<h2>{{instructions}}</h2>
+<form action="/questions/{{question_num}}">
+    <button id="start-survey">Start Survey</button>
+</form>
+<!-- <script src="/static/app.js"></script> -->
+{% endblock %}
+
