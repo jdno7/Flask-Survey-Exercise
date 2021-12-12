@@ -14,9 +14,8 @@ responses = 'responses'
 
 @app.route('/')
 def home():
-    session[responses] = []
-    # session.permanent = True
-    # responses = session['responses']
+    if session['responses']:
+        return redirect('/questions/<question_num>') 
     question_num = 0
     title = satisfaction_survey.title
     instructions = satisfaction_survey.instructions
@@ -24,6 +23,8 @@ def home():
 
 @app.route('/questions/<question_num>')
 def questions(question_num):
+    if session['responses'] == None:
+        session['responses'] = []
     responses = session['responses']
     question_num = len(responses)
     
@@ -35,7 +36,7 @@ def questions(question_num):
         
     
     if len(responses) == len(satisfaction_survey.questions):
-            responses = []
+            session['responses'] = []
             return render_template('thankyou.html')
     
     question_num = len(responses)
